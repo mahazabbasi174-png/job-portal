@@ -3,104 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Portal</title>
+<title>Career Jobs Hub - Find Your Dream Job</title>
+
 <style>
+* { box-sizing: border-box; }
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f6fa;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #243247;
 }
 header {
-  background: #123b70;
-  color: white;
-  padding: 25px;
-  text-align: center;
+    background: #102d50;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
-nav {
-  background: white;
-  padding: 15px;
-  text-align: center;
-}
+.logo { font-size: 25px; font-weight: bold; }
+.logo span { color: #35d0a0; }
 nav a {
-  margin: 12px;
-  color: #123b70;
-  text-decoration: none;
-  font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
 }
 .hero {
-  text-align: center;
-  padding: 45px 15px;
+    background: linear-gradient(120deg,#102d50,#176c91);
+    color: white;
+    text-align: center;
+    padding: 75px 15px;
 }
-input {
-  padding: 13px;
-  width: 65%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.hero h1 { font-size: 38px; margin: 0 0 15px; }
+.hero p { font-size: 17px; }
+.search-box {
+    max-width: 650px;
+    margin: 30px auto 0;
+    display: flex;
+    background: white;
+    padding: 7px;
+    border-radius: 8px;
+}
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    border: none;
+    outline: none;
+    font-size: 16px;
 }
 button {
-  padding: 13px 22px;
-  background: #1475d1;
-  color: white;
-  border: none;
-  border-radius: 5px;
+    background: #20b889;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
 }
-.jobs {
-  padding: 20px;
-  max-width: 700px;
-  margin: auto;
+.container {
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 0 18px;
+}
+h2 { color: #102d50; }
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0 35px;
+}
+.categories button {
+    background: white;
+    color: #102d50;
+    border: 1px solid #dce4ed;
+}
+.categories button.active,
+.categories button:hover {
+    background: #20b889;
+    color: white;
 }
 .job {
-  background: white;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px #ddd;
+    background: white;
+    padding: 22px;
+    border-radius: 9px;
+    margin-bottom: 16px;
+    border: 1px solid #e5eaf0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.job h3 { margin: 0 0 10px; color: #102d50; }
+.job p { margin: 7px 0; color: #64748b; }
+.tag {
+    display: inline-block;
+    background: #e5f8f1;
+    color: #16845f;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+.apply {
+    background: #102d50;
+    text-decoration: none;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 5px;
+}
+#noJobs {
+    display: none;
+    text-align: center;
+    padding: 30px;
 }
 footer {
-  background: #123b70;
-  color: white;
-  text-align: center;
-  padding: 20px;
+    background: #102d50;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+}
+footer a { color: #35d0a0; }
+@media(max-width:600px) {
+    .hero h1 { font-size: 29px; }
+    header { justify-content: center; }
+    nav a { margin: 0 7px; }
+    .search-box { flex-direction: column; gap: 8px; }
 }
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>ONLINE JOB PORTAL</h1>
-<p>Find Your Dream Job Today</p>
+    <div class="logo">Career<span>Jobs</span>Hub</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#jobs">Find Jobs</a>
+        <a href="#categories">Categories</a>
+        <a href="#contact">Contact</a>
+    </nav>
 </header>
-<nav>
-<a href="#">Home</a>
-<a href="#jobs">Jobs</a>
-<a href="#contact">Contact</a>
-</nav>
+
 <section class="hero">
-<h2>Find Your Perfect Job</h2>
-<p>Search latest job opportunities</p>
-<input type="text" placeholder="Search jobs...">
-<button>Search</button>
+    <h1>Find Your Dream Job Today</h1>
+    <p>Discover opportunities and build your future.</p>
+
+    <div class="search-box">
+        <input type="text" id="searchInput"
+        placeholder="Search job title or location...">
+        <button onclick="searchJobs()">Search Jobs</button>
+    </div>
 </section>
-<section class="jobs" id="jobs">
-<h2>Latest Jobs</h2>
-<div class="job">
-<h3>Data Entry Operator</h3>
-<p>Work Type: Remote</p>
-<p>Experience: Beginner</p>
+
+<div class="container" id="categories">
+    <h2>Popular Job Categories</h2>
+
+    <div class="categories">
+        <button class="active" onclick="filterJobs('All',this)">All Jobs</button>
+        <button onclick="filterJobs('IT',this)">IT & Technology</button>
+        <button onclick="filterJobs('Marketing',this)">Marketing</button>
+        <button onclick="filterJobs('Finance',this)">Finance</button>
+        <button onclick="filterJobs('Remote',this)">Remote Jobs</button>
+    </div>
 </div>
-<div class="job">
-<h3>Typing Operator</h3>
-<p>Work Type: Online</p>
-<p>Experience: Beginner</p>
+
+<div class="container" id="jobs">
+    <h2>Latest Jobs</h2>
+    <p>Explore available job opportunities.</p>
+
+    <div id="jobList">
+
+        <div class="job" data-category="IT" data-search="web developer remote pakistan">
+            <div>
+                <h3>Junior Web Developer</h3>
+                <p>Company: Example Company</p>
+                <p>Location: Remote</p>
+                <span class="tag">IT & Technology</span>
+            </div>
+            <a class="apply" href="mailto:your-email@example.com?subject=Web Developer Application">Apply Now</a>
+        </div>
+
+        <div class="job" data-category="Marketing" data-search="digital marketing manager usa">
+            <div>
+                <h3>Digital Marketing Assistant</h3>
+                <p>Company: Example Company</p>
+                <p>Location: USA</p>
+                <span class="tag">Marketing</span>
+            </div>
+            <a class="apply" href="mailto:your-email@example.com?subject=Marketing Application">Apply Now</a>
+        </div>
+
+        <div class="job" data-category="Finance" data-search="accountant finance office">
+            <div>
+                <h3>Junior Accountant</h3>
+                <p>Company: Example Company</p>
+                <p>Location: Worldwide</p>
+                <span class="tag">Finance</span>
+            </div>
+            <a class="apply" href="mailto:your-email@example.com?subject=Accountant Application">Apply Now</a>
+        </div>
+
+        <div class="job" data-category="Remote" data-search="data entry typing remote">
+            <div>
+                <h3>Online Data Entry Operator</h3>
+                <p>Company: Example Company</p>
+                <p>Location: Work From Home</p>
+                <span class="tag">Remote</span>
+            </div>
+            <a class="apply" href="mailto:your-email@example.com?subject=Data Entry Application">Apply Now</a>
+        </div>
+
+    </div>
+
+    <div id="noJobs">No jobs found. Try another search.</div>
 </div>
-<div class="job">
-<h3>Office Assistant</h3>
-<p>Work Type: Full Time</p>
-<p>Experience: Required</p>
-</div>
-</section>
+
 <footer id="contact">
-<p>Contact Us | Online Job Portal</p>
+    <h3>Career Jobs Hub</h3>
+    <p>Your destination for career opportunities.</p>
+    <p>Contact: your-email@example.com</p>
+    <p>© 2026 Career Jobs Hub. All Rights Reserved.</p>
 </footer>
+
+<script>
+let selectedCategory = "All";
+
+function updateJobs() {
+    const search = document.getElementById("searchInput").value.toLowerCase();
+    const jobs = document.querySelectorAll(".job");
+    let count = 0;
+
+    jobs.forEach(job => {
+        const category = job.dataset.category;
+        const words = job.dataset.search.toLowerCase();
+        const matchesSearch = words.includes(search);
+        const matchesCategory =
+            selectedCategory === "All" ||
+            category === selectedCategory;
+
+        if (matchesSearch && matchesCategory) {
+            job.style.display = "flex";
+            count++;
+        } else {
+            job.style.display = "none";
+        }
+    });
+
+    document.getElementById("noJobs").style.display =
+        count === 0 ? "block" : "none";
+}
+
+function searchJobs() {
+    updateJobs();
+    document.getElementById("jobs").scrollIntoView();
+}
+
+function filterJobs(category, button) {
+    selectedCategory = category;
+    document.querySelectorAll(".categories button")
+        .forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    updateJobs();
+}
+
+document.getElementById("searchInput")
+    .addEventListener("input", updateJobs);
+</script>
+
 </body>
 </html>
